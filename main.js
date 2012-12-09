@@ -27,8 +27,7 @@
 define(function (require, exports, module) {
     'use strict';
 
-    var codeMirror, count, i = 0,
-        Commands                = brackets.getModule("command/Commands"),
+    var Commands                = brackets.getModule("command/Commands"),
         CommandManager          = brackets.getModule("command/CommandManager"),
         EditorManager           = brackets.getModule("editor/EditorManager"),
         DocumentManager         = brackets.getModule("document/DocumentManager"),
@@ -41,7 +40,7 @@ define(function (require, exports, module) {
     var _preferences, _command;
 
     function remove() {
-        var messages, result, text;
+        var messages, result, text, codeMirror, count, i = 0;
 
         var editor = EditorManager.getCurrentFullEditor();
         if (!editor) {
@@ -120,10 +119,14 @@ define(function (require, exports, module) {
 
 
     // Setup the UI
-    function load() {
-        loadPreferences();
-        loadCommand();
-        loadMenuItem();
+    function load(nomenu) {
+        if (nomenu) {
+            $(DocumentManager).on("currentDocumentChange documentSaved", remove);
+        } else {
+            loadPreferences();
+            loadCommand();
+            loadMenuItem();
+        }
     }
 
     // Tear down the UI

@@ -13,6 +13,10 @@ Clone the extension into the user subdirectory:
 
     git clone git://github.com/atishay811/brackets-RemoveTrailingSpaces.git user/RemoveTrailingSpaces
 
+There is also support for removing the menu item(I also hate the menu clutter). If you do need an always on version with no menu item, open *main.js* and change the last line to:
+
+    load(true)
+
 License
 ==========
 Created by Atishay Jain
